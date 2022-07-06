@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-const userListController = async (req: Request, res: Response) => {
+const userLoginController = async (req: Request, res: Response) => {
   try {
   } catch (err) {
     if (err instanceof Error) {
@@ -12,4 +12,4 @@ const userListController = async (req: Request, res: Response) => {
   }
 };
 
-export default userListController;
+export default userLoginController;

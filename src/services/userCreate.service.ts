@@ -1,4 +1,4 @@
-import { IUserRequest } from "../interfaces";
+import { IUserCreate } from "../interfaces";
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/user.entity";
 import bycrypt from "bcrypt";
@@ -8,14 +8,14 @@ const createUserService = async ({
   email,
   age,
   password,
-}: IUserRequest) => {
+}: IUserCreate) => {
   const userRepository = AppDataSource.getRepository(User);
   const users = await userRepository.find();
 
   const emailAlreadyExists = users.find((user) => user.email === email);
 
   if (emailAlreadyExists) {
-    return "Email already exists";
+    throw new Error("Email already exists");
   }
 
   const user = new User();
@@ -27,7 +27,7 @@ const createUserService = async ({
   userRepository.create(user);
   await userRepository.save(user);
 
-  return {...user, password: undefined};
+  return user;
 };
 
 export default createUserService;
