@@ -6,6 +6,6 @@ const userRoutes = Router();
 
 userRoutes.post("", userCreateController);
 
-userRoutes.get("", userListControllera);
+userRoutes.get("", userListController);
 
 export default userRoutes;
