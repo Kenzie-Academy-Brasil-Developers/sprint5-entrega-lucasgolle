@@ -1,34 +1,40 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import nodeTest from "node:test";
-import { AppDataSource } from "../data-source";
-import { User } from "../entities/user.entity";
 
 export const authUser = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization
+  const token = req.headers.authorization;
 
-    if(!token){
-        return res.status(401).json({
-            message: "Invalid token"
-        })
-    }
+  if (!token) {
+    return res.status(401).json({
+      message: "Invalid tokensss",
+    });
+  }
 
-    const splitToken = token.split(" ")[1]
+  const splitToken = token.split(" ")[1];
 
-    const secret = process.env.SECRET_KEY;
+  console.log(splitToken);
 
-    jwt.verify(splitToken, secret!, (error, decoded) => {
-        if(!decoded){
-            return res.status(401).json({
-                message: "Invalid token"
-            })
-        }
+  const secret = process.env.SECRET_KEY;
 
-         const { userId } = <any>decoded;
+  console.log(secret);
 
-         req.idUser = userId
-        })
 
-        return next();
-  
+
+  const testJwt = jwt.verify(splitToken, secret!, (error, decoded) => {
+    console.log(decoded);
+  });
+
+  console.log(testJwt)
+  // if(!decoded){
+  //     return res.status(401).json({
+  //         message: "Invalid token"
+  //     })
+  // }
+
+  //  const { userId } = <any>decoded;
+
+  //  req.idUser = userId
+  // })
+
+  return next();
 };

@@ -18,7 +18,7 @@ const userLoginService = async ({ email, password }: IUserLogin) => {
     throw new Error("Wrong email/password");
   }
 
-  const token = jwt.sign({ email: email, id: account.id }, String(process.env.JWT_SECRET), {
+  const token = jwt.sign({ message: "Oi mundo"}, String(process.env.SECRET_KEY), {
     expiresIn: "24h",
   });
 

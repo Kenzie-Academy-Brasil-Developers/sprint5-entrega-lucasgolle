@@ -15,7 +15,7 @@ userRoutes.post("/login", userLoginController);
 
 userRoutes.get("", usersListController);
 
-userRoutes.get("/:id", userListController);
+userRoutes.get("/:id", authUser, userListController);
 
 userRoutes.patch("/:id", userUpdatePasswordController);
 
