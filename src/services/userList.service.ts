@@ -1,7 +1,5 @@
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/user.entity";
-import { IUserList } from "../interfaces";
-import jwt from "jsonwebtoken";
 
 const userListService = async (id: string) => {
   const userRepository = AppDataSource.getRepository(User);

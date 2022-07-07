@@ -20,21 +20,19 @@ export const authUser = (req: Request, res: Response, next: NextFunction) => {
 
 
 
-  const testJwt = jwt.verify(splitToken, secret!, (error, decoded) => {
-    console.log(decoded);
-  });
+  jwt.verify(splitToken, secret!, (error, decoded) => {
+    if(!decoded){
+        return res.status(401).json({
+            message: "Invalid token"
+        })
+    }
 
-  console.log(testJwt)
-  // if(!decoded){
-  //     return res.status(401).json({
-  //         message: "Invalid token"
-  //     })
-  // }
+   const { userId } = <any>decoded;
 
-  //  const { userId } = <any>decoded;
+   console.log(userId)
 
-  //  req.idUser = userId
-  // })
+   req.idUser = userId
+  })
 
   return next();
 };
